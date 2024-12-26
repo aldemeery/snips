@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+git checkout main
+git pull
+
+CURRENT_TAG=$(git describe | tr "-" "\n" | head -n1)
+NEXT_TAG=$((CURRENT_TAG + 1))
+
+git tag -a $NEXT_TAG -m $NEXT_TAG
+echo "NEXT TAG IS ${NEXT_TAG} created"
+
+git push --tags --no-verify
